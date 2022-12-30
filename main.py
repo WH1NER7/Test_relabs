@@ -12,8 +12,8 @@ html = """
     <body>
         <h1>WebSocket Chat</h1>
         <form action="" onsubmit="sendMessage(event)">
-            <input type="text" id="messageText" autocomplete="off"/>
-            <button>Send</button>
+            <input type="json" id="messageText" autocomplete="off"/>
+            <button>Отправить json</button>
         </form>
         <ul id='messages'>
         </ul>
