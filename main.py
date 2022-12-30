@@ -53,5 +53,5 @@ async def websocket_endpoint(websocket: WebSocket):
         name = data.get('name')
         user_id = data.get('user_id')
         msg_text = data.get('text')
-        await websocket.send_text(f"Сообщение от {name} ({user_id}): {msg_text}")
+        await websocket.send_text(f"{msg_count}. Сообщение от {name} ({user_id}): {msg_text}")
 
