@@ -23,7 +23,12 @@ html = """
             ws.onmessage = function(event) {
                 var messages = document.getElementById('messages')
                 var message = document.createElement('li')
-                var content = document.createTextNode(event.data)
+                var parsedData = JSON.parse(event.data);
+                var text = parsedData.text
+                var email = parsedData.email
+                var number = parsedData.number
+                var str_to_show = `${number} Сообщение от ${email}. Текст: ${text}`;
+                var content = document.createTextNode(str_to_show)
                 message.appendChild(content)
                 messages.appendChild(message)
             };
@@ -85,5 +90,10 @@ async def websocket_endpoint(websocket: WebSocket):
         data = await websocket.receive_json()
         text = data.get('text')
         email = data.get('email')
-        await websocket.send_text(f"Сообщение от {email}. Текст: {text}")
+        response = {
+            "text": text,
+            "email": email,
+            "number": msg_count
+        }
+        await websocket.send_json(response)
 
